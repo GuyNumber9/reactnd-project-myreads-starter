@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
-import ShelfPage from './components/ShelfPage'
-import SearchPage from './components/SearchPage'
+import ShelvesView from './components/ShelvesView'
+import SearchView from './components/SearchView'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
 
@@ -20,8 +20,8 @@ class BooksApp extends React.Component {
     return (
         <BrowserRouter>
           <div className="app">
-          <Route path='/' component={ShelfPage} />
-          <Route exact path='/search' component={SearchPage} />
+          <Route exact path='/' component={ShelvesView} />
+          <Route path='/search' component={SearchView} />
           </div>
         </BrowserRouter>
       
