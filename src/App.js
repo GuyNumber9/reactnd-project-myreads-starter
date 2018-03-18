@@ -7,7 +7,7 @@ import './App.css'
 
 class BooksApp extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       books: []
@@ -16,9 +16,9 @@ class BooksApp extends React.Component {
     this.bookMoveCallbackHandler = (data, book, shelf) => {
       console.log('Book updated', data)
       let books = this.state.books.concat([])
-      if(book.shelf){
-        for(let index = 0; index < books.length; ++index){
-          if(books[index].id === book.id){
+      if (book.shelf) {
+        for (let index = 0; index < books.length; ++index) {
+          if (books[index].id === book.id) {
             books[index].shelf = shelf;
             break;
           }
@@ -28,7 +28,7 @@ class BooksApp extends React.Component {
         book.shelf = shelf
         books.push(book);
       }
-      this.setState({books})
+      this.setState({ books })
     }
 
     this.bookMoveCallbackHandler = this.bookMoveCallbackHandler.bind(this)
@@ -38,7 +38,7 @@ class BooksApp extends React.Component {
       BooksAPI.update(book, shelf).then((data) => {
         this.bookMoveCallbackHandler(data, book, shelf)
       })
-      
+
     }
 
     this.bookMoveHandler = this.bookMoveHandler.bind(this)
@@ -50,23 +50,23 @@ class BooksApp extends React.Component {
       console.log('getAll()', data)
       this.setState({
         books: data
-      }) 
-    } )
+      })
+    })
   }
 
   render() {
     return (
-        <BrowserRouter>
-          <div className="app">
+      <BrowserRouter>
+        <div className="app">
           <Route exact path='/' render={(props) => {
             return <ShelvesView {...props} books={this.state.books} bookMoveHandler={this.bookMoveHandler} />
-            }} />
+          }} />
           <Route path='/search' render={(props) => {
             return <SearchView {...props} bookMoveHandler={this.bookMoveHandler} books={this.state.books} />
-            }} />
-          </div>
-        </BrowserRouter>
-      
+          }} />
+        </div>
+      </BrowserRouter>
+
     )
   }
 }

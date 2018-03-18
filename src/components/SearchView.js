@@ -4,7 +4,7 @@ import * as BooksAPI from '../BooksAPI'
 import Book from './BookComponent'
 
 class SearchComponent extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       books: []
@@ -12,14 +12,14 @@ class SearchComponent extends React.Component {
 
     this.searchCallback = (books) => {
       console.log('found ', books);
-      if(books.error){
-        this.setState({books: []})
+      if (books.error) {
+        this.setState({ books: [] })
         return;
       }
-      
-      for(let searchBook of books){
-        for(let listBook of this.props.books){
-          if(searchBook.id === listBook.id){
+
+      for (let searchBook of books) {
+        for (let listBook of this.props.books) {
+          if (searchBook.id === listBook.id) {
             searchBook.shelf = listBook.shelf
             break
           }
@@ -34,7 +34,7 @@ class SearchComponent extends React.Component {
     this.searchCallback = this.searchCallback.bind(this)
 
     this.changeHandler = (ev) => {
-      let query = ev.target.value
+      let query = ev.target.value.trim()
       console.log(query)
       BooksAPI.search(query).then(this.searchCallback)
     }
@@ -42,14 +42,14 @@ class SearchComponent extends React.Component {
     this.changeHandler.bind(this)
   }
 
-  
 
-  render(){
+
+  render() {
     return (<div className="search-books">
-    <div className="search-books-bar">
-      <Link to="/">Close</Link>
-      <div className="search-books-input-wrapper">
-        {/*
+      <div className="search-books-bar">
+        <Link to="/">Close</Link>
+        <div className="search-books-input-wrapper">
+          {/*
           NOTES: The search from BooksAPI is limited to a particular set of search terms.
           You can find these search terms here:
           https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
@@ -57,16 +57,16 @@ class SearchComponent extends React.Component {
           However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
           you don't find a specific author or title. Every search is limited by search terms.
         */}
-        <input type="text" placeholder="Search by title or author" onChange={this.changeHandler} />
+          <input type="text" placeholder="Search by title or author" onChange={this.changeHandler} />
 
+        </div>
       </div>
-    </div>
-    <div className="search-books-results">
-      <ol className="books-grid">
-        {this.state.books.map((book) => (<Book key={book.id} book={book} bookMoveHandler={this.props.bookMoveHandler} />))}
-      </ol>
-    </div>
-  </div>)
+      <div className="search-books-results">
+        <ol className="books-grid">
+          {this.state.books.map((book) => (<Book key={book.id} book={book} bookMoveHandler={this.props.bookMoveHandler} />))}
+        </ol>
+      </div>
+    </div>)
   }
 }
 

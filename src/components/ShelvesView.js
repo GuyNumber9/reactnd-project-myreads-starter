@@ -2,12 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Shelf from './ShelfComponent'
 
-import * as BooksAPI from '../BooksAPI'
 /*
 TODO:
-	- Don't use change event
     - Use proptypes
-    ...
+    - Add documentation to the README file
+    - Add code comments
 */
 class ShelvesView extends React.Component {
   constructor(props) {
