@@ -1,13 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import Shelf from './ShelfComponent'
 
-/*
-TODO:
-    - Use proptypes
-    - Add documentation to the README file
-    - Add code comments
-*/
+// This component is used to render the main page containing the 3 book shelves
 class ShelvesView extends React.Component {
   constructor(props) {
     super(props)
@@ -43,6 +39,19 @@ class ShelvesView extends React.Component {
       </div>
     </div>)
   }
+}
+
+// Defining the prop types for the component
+ShelvesView.propTypes = {
+  books: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    authors: PropTypes.arrayOf(PropTypes.string),
+    shelf: PropTypes.string,
+    imageLinks: PropTypes.shape({
+		thumbnail: PropTypes.string
+	})
+  })),
+	bookMoveHandler: PropTypes.func.isRequired
 }
 
 export default ShelvesView

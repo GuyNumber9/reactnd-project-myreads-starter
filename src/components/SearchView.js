@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import * as BooksAPI from '../BooksAPI'
 import Book from './BookComponent'
 
-class SearchComponent extends React.Component {
+// This component is used for rendering the search page
+// It is passed the current books in order to update the search results with current book state
+class SearchView extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -70,4 +73,17 @@ class SearchComponent extends React.Component {
   }
 }
 
-export default SearchComponent
+// Defining the prop types for the SearchView component
+SearchView.propTypes = {
+  books: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    authors: PropTypes.arrayOf(PropTypes.string),
+    shelf: PropTypes.string,
+    imageLinks: PropTypes.shape({
+		thumbnail: PropTypes.string
+	})
+  })),
+	bookMoveHandler: PropTypes.func.isRequired
+}
+                                           
+export default SearchView
