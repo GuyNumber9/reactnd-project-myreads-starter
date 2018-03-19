@@ -1,6 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export default function (props) {
+let BookComponent = function (props) {
   return (<li><div className="book">
     <div className="book-top">
       <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${props.book.imageLinks && props.book.imageLinks.thumbnail})` }}></div>
@@ -18,3 +19,14 @@ export default function (props) {
     <div className="book-authors">{props.book.authors && props.book.authors.join(', ')}</div>
   </div></li>)
 }
+
+BookComponent.propTypes = {
+  book: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    authors: PropTypes.arrayOf(PropTypes.string),
+    shelf: PropTypes.string,
+    imageLinks: PropTypes.arrayOf(PropTypes.string)
+  })
+}
+
+export default BookComponent
